@@ -1,16 +1,28 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { translations } from '../utils/translations';
 
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-    const [language, setLanguage] = useState('en');
+    const [language, setLanguage] = useState(() => {
+        const savedLang = localStorage.getItem('portfolio-language');
+        if (savedLang === 'en' || savedLang === 'fr') {
+            return savedLang;
+        }
+        const userLang = navigator.language || navigator.userLanguage;
+        return userLang && userLang.startsWith('fr') ? 'fr' : 'en';
+    });
+
+    useEffect(() => {
+        localStorage.setItem('portfolio-language', language);
+        document.documentElement.lang = language;
+    }, [language]);
 
     const toggleLanguage = () => {
         setLanguage((prev) => (prev === 'en' ? 'fr' : 'en'));
     };
 
-    const t = translations[language];
+    const t = translations[language] || translations.en;
 
     return (
         <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
@@ -20,3 +32,4 @@ export const LanguageProvider = ({ children }) => {
 };
 
 export const useLanguage = () => useContext(LanguageContext);
+

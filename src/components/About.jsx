@@ -1,14 +1,14 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
-import { GraduationCap, Gamepad2, Plane, Quote, Film } from 'lucide-react';
-import { fadeInUp, staggerContainer } from '../utils/animations';
+import { Layers, ShieldCheck, Zap, Quote, Gamepad2, Plane, Film, Heart } from 'lucide-react';
+import { fadeInUp } from '../utils/animations';
 import SectionContainer from './SectionContainer';
 import './About.css';
 
-// Custom Football icon since Lucide doesn't have a dedicated one that looks like a soccer ball perfectly
-const Football = ({ size = 24, className = "" }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+// Custom Football icon
+const Football = ({ size = 20, className = "" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
         <circle cx="12" cy="12" r="10"></circle>
         <polygon points="12 5 16 9 14.5 14 9.5 14 8 9"></polygon>
         <polyline points="12 5 12 2"></polyline>
@@ -21,11 +21,20 @@ const Football = ({ size = 24, className = "" }) => (
 
 const getHobbyIcon = (iconName) => {
     switch (iconName) {
-        case 'gamepad': return <Gamepad2 size={28} />;
-        case 'football': return <Football size={28} />;
-        case 'plane': return <Plane size={28} />;
-        case 'film': return <Film size={28} />;
-        default: return <Gamepad2 size={28} />;
+        case 'gamepad': return <Gamepad2 size={20} aria-hidden="true" />;
+        case 'football': return <Football size={20} />;
+        case 'plane': return <Plane size={20} aria-hidden="true" />;
+        case 'film': return <Film size={20} aria-hidden="true" />;
+        default: return <Gamepad2 size={20} aria-hidden="true" />;
+    }
+};
+
+const getHighlightIcon = (index) => {
+    switch (index) {
+        case 0: return <Layers size={22} className="pillar-icon" aria-hidden="true" />;
+        case 1: return <ShieldCheck size={22} className="pillar-icon" aria-hidden="true" />;
+        case 2: return <Zap size={22} className="pillar-icon" aria-hidden="true" />;
+        default: return <Layers size={22} className="pillar-icon" aria-hidden="true" />;
     }
 };
 
@@ -35,117 +44,95 @@ const About = () => {
     return (
         <SectionContainer id="about" className="about-section">
             <div className="container">
-                <h2 className="section-title">
-                    {t.about.title}
-                </h2>
+                <div className="section-header">
+                    <h2 className="section-title">{t.about.title}</h2>
+                    <p className="section-subtitle">{t.about.subtitle}</p>
+                    <div className="section-divider" aria-hidden="true"></div>
+                </div>
 
-                <div className="about-content glass-card">
-                    <div className="about-layout">
-
-                        {/* Main Description & Quote */}
+                <div className="about-main-card glass-card">
+                    <div className="about-top-layout">
+                        {/* Left column: Bio & Quote */}
                         <motion.div
-                            className="about-left-col"
+                            className="about-bio-col"
                             variants={fadeInUp}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                         >
-                            <p className="about-description-main">
+                            <p className="about-lead">
                                 {t.about.description}
                             </p>
 
-                            <motion.div
-                                className="about-quote-box"
-                                whileHover={{ scale: 1.02 }}
-                            >
-                                <Quote className="quote-icon-bg" size={60} />
+                            <div className="about-quote-box">
+                                <Quote className="quote-icon-bg" size={48} aria-hidden="true" />
                                 <p className="quote-text">{t.about.quote}</p>
-                            </motion.div>
+                            </div>
                         </motion.div>
 
-                        {/* Image / Sticker */}
+                        {/* Right column: Sticker image */}
                         <motion.div
-                            className="about-image-container"
+                            className="about-visual-col"
                             variants={fadeInUp}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
                         >
+                            <div className="sticker-glow-frame">
+                                <div className="sticker-wrapper">
+                                    <img
+                                        src="/assets/images/sticker.png"
+                                        alt="Ait Oujkal Farouk avatar sticker"
+                                        className="about-sticker"
+                                        width="220"
+                                        height="220"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Engineering Pillars / Highlights */}
+                    <div className="about-pillars-grid">
+                        {t.about.highlights.map((highlight, idx) => (
                             <motion.div
-                                className="sticker-wrapper"
-                                animate={{ y: [0, -10, 0] }}
-                                transition={{
-                                    repeat: Infinity,
-                                    duration: 4,
-                                    ease: "easeInOut"
-                                }}
-                                whileHover={{ scale: 1.05 }}
+                                key={idx}
+                                className="pillar-card"
+                                initial={{ opacity: 0, y: 15 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.35, delay: idx * 0.08 }}
                             >
-                                <img
-                                    src="/assets/images/sticker.png"
-                                    alt="About Me Sticker"
-                                    className="about-sticker"
-                                />
-                                <div className="sticker-glow"></div>
+                                <div className="pillar-icon-box">
+                                    {getHighlightIcon(idx)}
+                                </div>
+                                <h4>{highlight.title}</h4>
+                                <p>{highlight.desc}</p>
                             </motion.div>
-                        </motion.div>
-
+                        ))}
                     </div>
 
-                    {/* Timeline & Hobbies Grid */}
-                    <div className="about-bottom-grid">
-
-                        {/* Timeline */}
-                        <motion.div
-                            className="about-timeline"
-                            variants={fadeInUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                        >
-                            <h3 className="sub-title"><GraduationCap size={24} /> {t.about.timeline.title}</h3>
-                            <div className="timeline-container">
-                                {t.about.timeline.items.map((item, index) => (
-                                    <div key={index} className="timeline-item">
-                                        <div className="timeline-dot"></div>
-                                        <div className="timeline-content">
-                                            <span className="timeline-year">{item.year}</span>
-                                            <h4>{item.title}</h4>
-                                            <span className="timeline-institution">{item.institution}</span>
-                                            <p>{item.description}</p>
-                                        </div>
+                    {/* Hobbies / Personal side */}
+                    <div className="about-hobbies-section">
+                        <div className="hobbies-header">
+                            <Heart size={17} className="heart-icon" aria-hidden="true" />
+                            <span>{t.about.hobbies.title}</span>
+                        </div>
+                        <div className="hobbies-chips-grid">
+                            {t.about.hobbies.items.map((hobby, index) => (
+                                <div
+                                    key={index}
+                                    className="hobby-chip"
+                                >
+                                    <div className="hobby-chip-icon">
+                                        {getHobbyIcon(hobby.icon)}
                                     </div>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Hobbies */}
-                        <motion.div
-                            className="about-hobbies"
-                            variants={fadeInUp}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                        >
-                            <h3 className="sub-title">{t.about.hobbies.title}</h3>
-                            <div className="hobbies-grid">
-                                {t.about.hobbies.items.map((hobby, index) => (
-                                    <motion.div
-                                        key={index}
-                                        className="hobby-card"
-                                        whileHover={{ y: -5, scale: 1.05 }}
-                                    >
-                                        <div className="hobby-icon">
-                                            {getHobbyIcon(hobby.icon)}
-                                        </div>
-                                        <span>{hobby.name}</span>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </motion.div>
-
+                                    <span>{hobby.name}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-
                 </div>
             </div>
         </SectionContainer>

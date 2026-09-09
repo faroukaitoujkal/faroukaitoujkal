@@ -8,15 +8,15 @@ const SectionContainer = ({ children, id, className = '', delay = 0 }) => {
             className={`section ${className}`}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.08 }}
             variants={{
-                hidden: { opacity: 0, y: 50 },
+                hidden: { opacity: 0, y: 30 },
                 visible: {
                     opacity: 1,
                     y: 0,
                     transition: {
-                        duration: 0.6,
-                        ease: "easeOut",
+                        duration: 0.5,
+                        ease: [0.16, 1, 0.3, 1],
                         delay: delay
                     }
                 }

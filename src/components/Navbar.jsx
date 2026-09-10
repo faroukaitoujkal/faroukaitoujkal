@@ -1,210 +1,217 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Sun, Moon, Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
+import { Menu, X, Sun, Moon, Globe } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
     const { t, language, toggleLanguage } = useLanguage();
-    const { theme, toggleTheme } = useTheme();
+    const { isDark, toggleTheme } = useTheme();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home');
-    const location = useLocation();
-    const navigate = useNavigate();
-    const menuRef = useRef(null);
 
-    // Track scroll position for header glass backdrop
+    // Handle scroll events for navbar style and active section
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
-    // Scroll spy for active section highlight
-    useEffect(() => {
-        if (location.pathname !== '/') return;
+            // Update active section based on scroll position
+            const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
+            const scrollPosition = window.scrollY + 100;
 
-        const sectionIds = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
-        const handleSpy = () => {
-            const scrollPos = window.scrollY + 200;
-            for (let i = sectionIds.length - 1; i >= 0; i--) {
-                const el = document.getElementById(sectionIds[i]);
-                if (el && el.offsetTop <= scrollPos) {
-                    setActiveSection(sectionIds[i]);
-                    break;
+            for (const section of sections) {
+                const element = document.getElementById(section);
+                if (element) {
+                    const top = element.offsetTop;
+                    const height = element.offsetHeight;
+                    if (scrollPosition >= top && scrollPosition < top + height) {
+                        setActiveSection(section);
+                    }
                 }
             }
         };
 
-        window.addEventListener('scroll', handleSpy, { passive: true });
-        handleSpy();
-        return () => window.removeEventListener('scroll', handleSpy);
-    }, [location.pathname]);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
-    // Handle ESC key and body scroll lock when mobile menu is open
+    // Lock body scroll when mobile menu is open
     useEffect(() => {
-        const handleKeyDown = (e) => {
-            if (e.key === 'Escape' && isMobileMenuOpen) {
-                setIsMobileMenuOpen(false);
-            }
-        };
-
         if (isMobileMenuOpen) {
             document.body.style.overflow = 'hidden';
-            window.addEventListener('keydown', handleKeyDown);
         } else {
-            document.body.style.overflow = '';
+            document.body.style.overflow = 'unset';
         }
-
         return () => {
-            document.body.style.overflow = '';
-            window.removeEventListener('keydown', handleKeyDown);
+            document.body.style.overflow = 'unset';
         };
     }, [isMobileMenuOpen]);
 
-    const handleNavClick = (e, href) => {
-        e.preventDefault();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const scrollTo = (id) => {
         setIsMobileMenuOpen(false);
-
-        const targetId = href.replace('#', '');
-        setActiveSection(targetId);
-
+        
         if (location.pathname !== '/') {
-            navigate('/');
+            navigate(`/#${id}`);
             setTimeout(() => {
-                const element = document.querySelector(href);
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
+                const element = document.getElementById(id);
+                if (element) {
+                    window.scrollTo({
+                        top: element.offsetTop - 70,
+                        behavior: 'smooth',
+                    });
+                }
             }, 100);
-        } else {
-            const element = document.querySelector(href);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+            return;
+        }
+
+        const element = document.getElementById(id);
+        if (element) {
+            window.scrollTo({
+                top: element.offsetTop - 70,
+                behavior: 'smooth',
+            });
         }
     };
 
-    const navLinks = [
-        { id: 'home', name: t.nav.home, href: '#home' },
-        { id: 'about', name: t.nav.about, href: '#about' },
-        { id: 'experience', name: t.nav.experience, href: '#experience' },
-        { id: 'skills', name: t.nav.skills, href: '#skills' },
-        { id: 'projects', name: t.nav.projects, href: '#projects' },
-        { id: 'contact', name: t.nav.contact, href: '#contact' },
+    const navItems = [
+        { id: 'home', label: t.nav.home },
+        { id: 'about', label: t.nav.about },
+        { id: 'experience', label: t.nav.experience },
+        { id: 'skills', label: t.nav.skills },
+        { id: 'projects', label: t.nav.projects },
+        { id: 'contact', label: t.nav.contact },
     ];
 
     return (
-        <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="container nav-container">
-                <a href="/" className="logo" aria-label="Ait Oujkal Farouk Home">
-                    <img src="/assets/images/logo.png" alt="Ait Oujkal Farouk Logo" />
+        <>
+            <nav className={`navbar ${isScrolled || isMobileMenuOpen ? 'scrolled' : ''}`}>
+                <div className="container nav-container">
+                {/* Logo */}
+                <a
+                    href="#home"
+                    onClick={(e) => { e.preventDefault(); scrollTo('home'); }}
+                    className="nav-logo"
+                    aria-label="Retour à l'accueil"
+                >
+                    farouk<span className="logo-accent">.dev</span>
                 </a>
 
                 {/* Desktop Nav */}
-                <div className="nav-actions">
-                    <ul className="nav-links desktop-only" role="menubar">
-                        {navLinks.map((link) => {
-                            const isActive = activeSection === link.id && location.pathname === '/';
-                            return (
-                                <li key={link.id} role="none">
-                                    <a
-                                        href={link.href}
-                                        role="menuitem"
-                                        className={isActive ? 'active' : ''}
-                                        onClick={(e) => handleNavClick(e, link.href)}
-                                    >
-                                        {link.name}
-                                        {isActive && (
-                                            <motion.span
-                                                layoutId="activeNavUnderline"
-                                                className="active-indicator"
-                                                transition={{ type: "spring", stiffness: 450, damping: 32 }}
-                                            />
-                                        )}
-                                    </a>
-                                </li>
-                            );
-                        })}
-                    </ul>
-
-                    <div className="toggles">
+                <div className="nav-links">
+                    {navItems.map((item) => (
+                        <a
+                            key={item.id}
+                            href={`#${item.id}`}
+                            className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                scrollTo(item.id);
+                            }}
+                        >
+                            {item.label}
+                        </a>
+                    ))}
+                    
+                    {/* Utility Buttons */}
+                    <div className="nav-utils">
                         <button
                             onClick={toggleLanguage}
-                            className="icon-btn lang-btn"
-                            aria-label={language === 'en' ? 'Passer en Français' : 'Switch to English'}
-                            title={language === 'en' ? 'Passer en Français' : 'Switch to English'}
+                            className="icon-btn"
+                            aria-label={language === 'fr' ? 'Switch to English' : 'Passer en Français'}
+                            title={language === 'fr' ? 'Switch to English' : 'Passer en Français'}
                         >
-                            <span>{language === 'en' ? 'FR' : 'EN'}</span>
+                            <Globe size={18} aria-hidden="true" />
+                            <span className="sr-only" style={{ display: 'none' }}>{language.toUpperCase()}</span>
                         </button>
+                        
                         <button
                             onClick={toggleTheme}
-                            className="icon-btn theme-btn"
-                            aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}
-                            title={theme === 'dark' ? 'Mode Clair' : 'Mode Sombre'}
+                            className="icon-btn"
+                            aria-label={isDark ? t.nav.themeLight : t.nav.themeDark}
+                            title={isDark ? t.nav.themeLight : t.nav.themeDark}
                         >
-                            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+                            {isDark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
                         </button>
                     </div>
-
-                    <button
-                        className="mobile-toggle"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-                        aria-expanded={isMobileMenuOpen}
-                    >
-                        {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-                    </button>
                 </div>
-            </div>
 
-            {/* Mobile Menu & Backdrop */}
-            <AnimatePresence>
-                {isMobileMenuOpen && (
-                    <>
-                        <motion.div
-                            className="mobile-backdrop"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            aria-hidden="true"
-                        />
-                        <motion.div
-                            ref={menuRef}
-                            className="mobile-menu glass-card"
-                            initial={{ opacity: 0, y: -15, scale: 0.98 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -15, scale: 0.98 }}
-                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        >
-                            <ul role="menu">
-                                {navLinks.map((link) => {
-                                    const isActive = activeSection === link.id && location.pathname === '/';
-                                    return (
-                                        <li key={link.id} role="none">
-                                            <a
-                                                href={link.href}
-                                                role="menuitem"
-                                                className={`mobile-nav-link ${isActive ? 'active' : ''}`}
-                                                onClick={(e) => handleNavClick(e, link.href)}
-                                            >
-                                                <span>{link.name}</span>
-                                                {isActive && <span className="mobile-active-dot" />}
-                                            </a>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </motion.div>
-                    </>
-                )}
-            </AnimatePresence>
+                {/* Mobile Menu Toggle */}
+                <button
+                    className="icon-btn mobile-toggle"
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    aria-expanded={isMobileMenuOpen}
+                    aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                >
+                    {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+                </button>
+            </div>
         </nav>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <>
+                            <motion.div
+                                className="mobile-overlay"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            />
+                            <motion.div
+                                className="mobile-menu"
+                                initial={{ x: '100%' }}
+                                animate={{ x: 0 }}
+                                exit={{ x: '100%' }}
+                                transition={{ type: 'tween', duration: 0.3 }}
+                            >
+                            <div className="mobile-nav-links">
+                                {navItems.map((item) => (
+                                    <a
+                                        key={item.id}
+                                        href={`#${item.id}`}
+                                        className={`mobile-link ${activeSection === item.id ? 'active' : ''}`}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            scrollTo(item.id);
+                                        }}
+                                    >
+                                        {item.label}
+                                    </a>
+                                ))}
+                            </div>
+                            
+                            <div className="mobile-utils">
+                                <button
+                                    onClick={toggleLanguage}
+                                    className="icon-btn"
+                                    aria-label={language === 'fr' ? 'Switch to English' : 'Passer en Français'}
+                                    title={language === 'fr' ? 'Switch to English' : 'Passer en Français'}
+                                >
+                                    <Globe size={20} aria-hidden="true" />
+                                    <span style={{ fontSize: '0.8rem', fontWeight: 600, marginLeft: '4px' }}>{language.toUpperCase()}</span>
+                                </button>
+                                
+                                <button
+                                    onClick={toggleTheme}
+                                    className="icon-btn"
+                                    aria-label={isDark ? t.nav.themeLight : t.nav.themeDark}
+                                    title={isDark ? t.nav.themeLight : t.nav.themeDark}
+                                >
+                                    {isDark ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
+                                </button>
+                            </div>
+                        </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
+        </>
     );
 };
 

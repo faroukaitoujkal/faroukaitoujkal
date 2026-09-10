@@ -1,68 +1,69 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ArrowUp } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = () => {
     const { t } = useLanguage();
-    const location = useLocation();
-    const navigate = useNavigate();
+    const currentYear = new Date().getFullYear();
 
     const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    const handleContactClick = (e) => {
-        e.preventDefault();
-        if (location.pathname !== '/') {
-            navigate('/#contact');
-            setTimeout(() => {
-                const element = document.querySelector('#contact');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        } else {
-            const element = document.querySelector('#contact');
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     };
 
     return (
-        <footer className="footer" role="contentinfo">
-            <div className="container footer-content">
-                <div className="footer-top">
-                    <div className="footer-brand">
-                        <p className="footer-name">
-                            © {new Date().getFullYear()} {t.footer.copyright}
-                        </p>
-                        <p className="footer-tagline">
-                            {t.footer.tagline}
-                        </p>
+        <footer className="footer">
+            <div className="container">
+                <div className="footer-content">
+                    <div className="footer-logo">
+                        farouk<span className="logo-accent">.dev</span>
                     </div>
-
-                    <button
-                        onClick={scrollToTop}
-                        className="back-to-top-btn"
-                        aria-label="Retourner en haut de page"
-                        title="Retour en haut"
-                    >
-                        <ArrowUp size={18} aria-hidden="true" />
-                    </button>
-                </div>
-
-                <div className="footer-bottom">
-                    <p className="footer-rights">
-                        {t.footer.rights}
+                    
+                    <p className="footer-tagline">
+                        {t.footer.tagline}
                     </p>
 
                     <div className="footer-links">
-                        <a href="#contact" onClick={handleContactClick}>{t.footer.contact}</a>
-                        <span className="divider" aria-hidden="true">•</span>
-                        <Link to="/mentions-legales">{t.footer.legal}</Link>
-                        <span className="divider" aria-hidden="true">•</span>
-                        <Link to="/politique-confidentialite">{t.footer.privacy}</Link>
+                        <Link to="/mentions-legales" onClick={scrollToTop} className="footer-link">{t.footer.legal}</Link>
+                        <Link to="/politique-confidentialite" onClick={scrollToTop} className="footer-link">{t.footer.privacy}</Link>
+                    </div>
+
+                    <div className="footer-bottom">
+                        <div className="copyright">
+                            &copy; {currentYear} {t.footer.copyright}. {t.footer.rights}
+                        </div>
+                        
+                        <div className="footer-socials">
+                            <a
+                                href="https://github.com/faroukaitoujkal"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="footer-social-link"
+                                aria-label="GitHub"
+                            >
+                                <Github size={20} aria-hidden="true" />
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/farouk-aitoujkal/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="footer-social-link"
+                                aria-label="LinkedIn"
+                            >
+                                <Linkedin size={20} aria-hidden="true" />
+                            </a>
+                            <a
+                                href="mailto:faroukaitoujkal@gmail.com"
+                                className="footer-social-link"
+                                aria-label="Email"
+                            >
+                                <Mail size={20} aria-hidden="true" />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,8 @@ export const translations = {
             skills: "Skills",
             projects: "Projects",
             contact: "Contact",
+            themeLight: "Switch to light mode",
+            themeDark: "Switch to dark mode",
         },
         hero: {
             status: "Open to new opportunities",
@@ -230,6 +232,12 @@ export const translations = {
                 sending: "Sending...",
                 success: "Message sent successfully! I will reply shortly.",
                 error: "Failed to send message. Please reach out via direct email.",
+                placeholders: {
+                    name: "John Doe",
+                    email: "john@example.com",
+                    subject: "Job opportunity",
+                    message: "Hello Farouk..."
+                }
             },
             email: "Email",
             github: "GitHub",
@@ -286,12 +294,14 @@ export const translations = {
             skills: "Compétences",
             projects: "Projets",
             contact: "Contact",
+            themeLight: "Passer au thème clair",
+            themeDark: "Passer au thème sombre",
         },
         hero: {
             status: "Disponible pour de nouvelles opportunités",
             greeting: "Bonjour, je suis",
             role: "Software Developer",
-            description: "Développeur passionné par la création de sites web modernes, d'applications interactives et de logiciels fiables. J'allie sens du détail, code propre et technologies éprouvées (React, Node.js, TypeScript, C#, Java, SQL) pour concevoir des solutions élégantes et pérennes.",
+            description: "Développeur passionné par la création de sites web modernes, d'applications interactives et de logiciels fiables. J'allie sens du détail, code propre et technologies éprouvées (React, Node.js, TypeScript, C#, Java, SQL) pour concevoir des solutions élégantes et évolutives.",
             cta: "Me contacter",
             downloadCV: "Télécharger mon CV",
             location: "Bruxelles, Belgique",
@@ -409,7 +419,7 @@ export const translations = {
                 tools: "Architecture & Outils"
             },
             list: [
-                { name: 'TypeScript', category: 'frontend', level: 'Avancé', description: 'Typage statique strict, architectures pérennes, fonctionnalités modernes' },
+                { name: 'TypeScript', category: 'frontend', level: 'Avancé', description: 'Typage statique strict, architectures évolutives, fonctionnalités modernes' },
                 { name: 'JavaScript', category: 'frontend', level: 'Avancé', description: 'Manipulation DOM avancée, asynchronisme async/await, logique réactive' },
                 { name: 'React', category: 'frontend', level: 'Avancé', description: 'Hooks, Context API, composants modulaires, intégration d\'interfaces dynamiques' },
                 { name: 'Angular', category: 'frontend', level: 'Intermédiaire', description: 'Framework d\'entreprise, injection de dépendances, services et RxJS' },
@@ -509,6 +519,12 @@ export const translations = {
                 sending: "Envoi en cours...",
                 success: "Message envoyé avec succès ! Je vous répondrai rapidement.",
                 error: "Échec de l'envoi. Vous pouvez m'écrire directement par email.",
+                placeholders: {
+                    name: "Jean Dupont",
+                    email: "jean@exemple.com",
+                    subject: "Opportunité professionnelle",
+                    message: "Bonjour Farouk..."
+                }
             },
             email: "Email",
             github: "GitHub",
@@ -516,7 +532,7 @@ export const translations = {
         },
         footer: {
             copyright: "Ait Oujkal Farouk — Software Developer",
-            tagline: "Conception de logiciels résilients, performants et pérennes.",
+            tagline: "Conception de logiciels résilients, performants et évolutifs.",
             rights: "Tous droits réservés.",
             legal: "Mentions légales",
             privacy: "Politique de confidentialité",

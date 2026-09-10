@@ -33,7 +33,6 @@ const Skills = () => {
                 <div className="section-header">
                     <h2 className="section-title">{t.skills.title}</h2>
                     <p className="section-subtitle">{t.skills.subtitle}</p>
-                    <div className="section-divider" aria-hidden="true"></div>
                 </div>
 
                 {/* Category Filters */}
@@ -50,7 +49,7 @@ const Skills = () => {
                                     className={`skill-filter-btn ${isActive ? 'active' : ''}`}
                                     onClick={() => setActiveFilter(cat.id)}
                                 >
-                                    <Icon size={15} aria-hidden="true" />
+                                    <Icon size={14} aria-hidden="true" />
                                     <span>{cat.label}</span>
                                     {isActive && (
                                         <motion.div
@@ -66,38 +65,29 @@ const Skills = () => {
                 </div>
 
                 {/* Skills Cards Grid */}
-                <motion.div
-                    className="skills-grid"
-                    layout
-                >
-                    <AnimatePresence mode="popLayout">
+                <div className="skills-grid">
+                    <AnimatePresence mode="wait">
                         {filteredSkills.map((skill) => (
                             <motion.div
                                 key={skill.name}
-                                layout
-                                initial={{ opacity: 0, scale: 0.94 }}
+                                initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.94 }}
-                                transition={{ duration: 0.25 }}
-                                className="skill-card glass-card"
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.2 }}
+                                className="skill-card"
                             >
+                                <div className="skill-accent-line" aria-hidden="true"></div>
                                 <div className="skill-top-row">
-                                    <span className="skill-category-badge">{skill.category}</span>
+                                    <h3 className="skill-name">{skill.name}</h3>
                                     <span className={`skill-level-badge ${getLevelClass(skill.level)}`}>
                                         {skill.level}
                                     </span>
                                 </div>
-
-                                <div className="skill-body">
-                                    <h3 className="skill-name">{skill.name}</h3>
-                                    <p className="skill-description">{skill.description}</p>
-                                </div>
-
-                                <div className="skill-accent-line" aria-hidden="true"></div>
+                                <p className="skill-description">{skill.description}</p>
                             </motion.div>
                         ))}
                     </AnimatePresence>
-                </motion.div>
+                </div>
             </div>
         </SectionContainer>
     );

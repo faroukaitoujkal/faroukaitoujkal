@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, GraduationCap, Calendar, MapPin, CheckCircle2, UserCheck } from 'lucide-react';
+import { Briefcase, GraduationCap, Calendar, MapPin, CheckSquare, UserCheck } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import SectionContainer from './SectionContainer';
 import './Experience.css';
@@ -15,7 +15,6 @@ const Experience = () => {
                 <div className="section-header">
                     <h2 className="section-title">{t.experience.title}</h2>
                     <p className="section-subtitle">{t.experience.subtitle}</p>
-                    <div className="section-divider" aria-hidden="true"></div>
                 </div>
 
                 {/* Tab Switcher */}
@@ -29,7 +28,7 @@ const Experience = () => {
                             className={`tab-btn ${activeTab === 'work' ? 'active' : ''}`}
                             onClick={() => setActiveTab('work')}
                         >
-                            <Briefcase size={17} aria-hidden="true" />
+                            <Briefcase size={18} aria-hidden="true" />
                             <span>{t.experience.tabs.experience}</span>
                             {activeTab === 'work' && (
                                 <motion.div
@@ -73,24 +72,24 @@ const Experience = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -15 }}
                                 transition={{ duration: 0.3 }}
-                                className="timeline-cards"
+                                className="timeline-container"
                             >
                                 {t.experience.work.map((item, idx) => (
-                                    <div key={idx} className="experience-card glass-card">
-                                        <div className="exp-card-header">
+                                    <div key={idx} className="experience-card">
+                                        <div className="exp-header">
                                             <div className="exp-role-info">
-                                                <div className="exp-company-badge">
-                                                    <Briefcase size={15} aria-hidden="true" />
+                                                <h3 className="exp-role">{item.role}</h3>
+                                                <div className="exp-company">
+                                                    <Briefcase size={16} aria-hidden="true" />
                                                     <span>{item.company}</span>
                                                 </div>
-                                                <h3 className="exp-role">{item.role}</h3>
                                             </div>
                                             <div className="exp-meta">
-                                                <span className="exp-period">
+                                                <span className="exp-meta-item">
                                                     <Calendar size={14} aria-hidden="true" />
                                                     {item.period}
                                                 </span>
-                                                <span className="exp-location">
+                                                <span className="exp-meta-item">
                                                     <MapPin size={14} aria-hidden="true" />
                                                     {item.location}
                                                 </span>
@@ -102,7 +101,7 @@ const Experience = () => {
                                         <div className="exp-points">
                                             {item.points.map((point, pIdx) => (
                                                 <div key={pIdx} className="exp-point-item">
-                                                    <CheckCircle2 size={16} className="point-icon" aria-hidden="true" />
+                                                    <CheckSquare size={16} className="point-icon" aria-hidden="true" />
                                                     <span>{point}</span>
                                                 </div>
                                             ))}
@@ -117,10 +116,10 @@ const Experience = () => {
                                         {item.reference && (
                                             <div className="exp-reference-box">
                                                 <div className="ref-icon">
-                                                    <UserCheck size={18} aria-hidden="true" />
+                                                    <UserCheck size={20} aria-hidden="true" />
                                                 </div>
                                                 <div className="ref-details">
-                                                    <span className="ref-title">{t.experience.refTitle || 'Professional Reference / Lead Dev'}</span>
+                                                    <span className="ref-title">{t.experience.refTitle || 'Professional Reference'}</span>
                                                     <span className="ref-name">{item.reference.name}</span>
                                                     <span className="ref-role">{item.reference.role} — {item.reference.company}</span>
                                                 </div>
@@ -139,24 +138,24 @@ const Experience = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -15 }}
                                 transition={{ duration: 0.3 }}
-                                className="timeline-cards"
+                                className="timeline-container"
                             >
                                 {t.experience.education.map((item, idx) => (
-                                    <div key={idx} className="experience-card glass-card">
-                                        <div className="exp-card-header">
+                                    <div key={idx} className="experience-card">
+                                        <div className="exp-header">
                                             <div className="exp-role-info">
-                                                <div className="exp-company-badge education">
-                                                    <GraduationCap size={15} aria-hidden="true" />
+                                                <h3 className="exp-role">{item.degree}</h3>
+                                                <div className="exp-company">
+                                                    <GraduationCap size={16} aria-hidden="true" />
                                                     <span>{item.institution}</span>
                                                 </div>
-                                                <h3 className="exp-role">{item.degree}</h3>
                                             </div>
                                             <div className="exp-meta">
-                                                <span className="exp-period">
+                                                <span className="exp-meta-item">
                                                     <Calendar size={14} aria-hidden="true" />
                                                     {item.period}
                                                 </span>
-                                                <span className="exp-location">
+                                                <span className="exp-meta-item">
                                                     <MapPin size={14} aria-hidden="true" />
                                                     {item.location}
                                                 </span>
@@ -169,7 +168,7 @@ const Experience = () => {
                                             <div className="exp-points">
                                                 {item.points.map((point, pIdx) => (
                                                     <div key={pIdx} className="exp-point-item">
-                                                        <CheckCircle2 size={16} className="point-icon" aria-hidden="true" />
+                                                        <CheckSquare size={16} className="point-icon" aria-hidden="true" />
                                                         <span>{point}</span>
                                                     </div>
                                                 ))}

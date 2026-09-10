@@ -1,283 +1,167 @@
 .about-section {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
+  background-color: var(--bg-main);
 }
 
-.about-main-card {
-    padding: 3rem;
-    max-width: 1080px;
-    margin: 0 auto;
-    width: 100%;
+.about-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  align-items: center;
 }
 
-.about-top-layout {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 3.5rem;
-    margin-bottom: 3rem;
+.about-text-content {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  order: 2;
 }
 
-.about-bio-col {
-    flex: 1.35;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.about-quote {
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  border-left: 4px solid var(--accent-primary);
+  background-color: var(--bg-secondary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  color: var(--text-main);
+  font-size: 1.05rem;
 }
 
-.about-lead {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-color);
-    margin: 0;
-    opacity: 0.96;
+.about-visual-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  order: 1;
 }
 
-/* Quote Box */
-.about-quote-box {
-    position: relative;
-    padding: 1.25rem 1.6rem;
-    background: rgba(var(--primary-color-rgb), 0.04);
-    border-left: 3px solid var(--primary-color);
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    overflow: hidden;
-    backdrop-filter: blur(8px);
-}
-
-.quote-icon-bg {
-    position: absolute;
-    top: -4px;
-    right: 8px;
-    opacity: 0.08;
-    color: var(--primary-color);
-    transform: rotate(15deg);
-    pointer-events: none;
-}
-
-.quote-text {
-    font-size: 1.05rem;
-    font-style: italic;
-    font-family: var(--font-header);
-    color: var(--secondary-color);
-    position: relative;
-    z-index: 1;
-    margin: 0;
-    line-height: 1.6;
-}
-
-/* Sticker visual */
-.about-visual-col {
-    flex: 0.85;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.sticker-glow-frame {
-    position: relative;
-    width: 270px;
-    height: 270px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.16) 0%, transparent 70%);
-}
-
-.sticker-wrapper {
-    position: relative;
-    width: 235px;
-    height: 235px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    overflow: hidden;
-    background: rgba(var(--primary-color-rgb), 0.04);
-    border: 1.5px solid rgba(var(--primary-color-rgb), 0.22);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
-    transition: transform var(--transition-normal), border-color var(--transition-normal);
-}
-
-.sticker-wrapper:hover {
-    transform: scale(1.04);
-    border-color: rgba(var(--primary-color-rgb), 0.45);
+.sticker-container {
+  width: 100%;
+  max-width: 280px;
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .about-sticker {
-    width: 78%;
-    max-height: 78%;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
-    display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+  transition: transform var(--transition-normal);
 }
 
-/* Engineering Pillars Grid */
-.about-pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-    padding-top: 2.25rem;
-    border-top: 1px solid var(--border-color);
-    margin-bottom: 2.25rem;
+.sticker-container:hover .about-sticker {
+  transform: scale(1.05) rotate(-2deg);
 }
 
-.pillar-card {
-    padding: 1.6rem;
-    background: rgba(var(--primary-color-rgb), 0.02);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+/* Highlights Grid */
+.about-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
 }
 
-.pillar-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--primary-color);
-    background: rgba(var(--primary-color-rgb), 0.06);
+.highlight-card {
+  padding: 2rem 1.5rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.pillar-icon-box {
-    width: 42px;
-    height: 42px;
-    border-radius: var(--radius-sm);
-    background: rgba(var(--primary-color-rgb), 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary-color);
+.highlight-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
 }
 
-.pillar-card h4 {
-    font-family: var(--font-header);
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0;
-    color: var(--text-color);
+.highlight-icon {
+  color: var(--accent-primary);
+  margin-bottom: 1.25rem;
 }
 
-.pillar-card p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin: 0;
+.highlight-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
 }
 
-/* Hobbies Section */
-.about-hobbies-section {
-    padding-top: 1.75rem;
-    border-top: 1px solid var(--border-color);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    flex-wrap: wrap;
+.highlight-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.hobbies-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-header);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--text-color);
+/* Hobbies */
+.about-hobbies {
+  border-top: 1px solid var(--border-color);
+  padding-top: 2.5rem;
 }
 
-.heart-icon {
-    color: var(--primary-color);
+.hobbies-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
 }
 
-.hobbies-chips-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+.hobbies-icon {
+  color: var(--accent-danger);
 }
 
-.hobby-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.45rem 1rem;
-    background: rgba(var(--primary-color-rgb), 0.03);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-full);
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    transition: all var(--transition-fast);
+.hobbies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.hobby-chip:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    background: rgba(var(--primary-color-rgb), 0.09);
-    transform: translateY(-1px);
+.hobby-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
 }
 
-.hobby-chip-icon {
-    color: var(--primary-color);
-    display: flex;
-    align-items: center;
+.hobby-item:hover {
+  color: var(--text-main);
+  border-color: var(--border-hover);
+  background-color: var(--bg-tertiary);
 }
 
 @media (max-width: 968px) {
-    .about-top-layout {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-    }
-
-    .about-pillars-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .about-main-card {
-        padding: 2rem 1.5rem;
-    }
-
-    .about-quote-box {
-        border-left: none;
-        border-top: 3px solid var(--primary-color);
-        border-radius: 0 0 var(--radius-md) var(--radius-md);
-    }
-
-    .about-hobbies-section {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .about-main-card {
-        padding: 1.5rem 1.15rem;
-    }
-
-    .about-lead {
-        font-size: 1rem;
-    }
-
-    .sticker-glow-frame {
-        width: 215px;
-        height: 215px;
-    }
-
-    .sticker-wrapper {
-        width: 190px;
-        height: 190px;
-    }
-
-    .about-sticker {
-        width: 78%;
-        max-height: 78%;
-    }
-
-    .pillar-card {
-        padding: 1.25rem;
-    }
+  .about-content-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-text-content {
+    order: 1;
+  }
+  
+  .about-visual-content {
+    order: 2;
+  }
+  
+  .about-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sticker-container {
+    max-width: 220px;
+  }
 }

@@ -32,33 +32,26 @@ const Hero = () => {
 
                     {/* Location Tag */}
                     <div className="hero-meta-badge">
-                        <MapPin size={16} className="meta-icon" aria-hidden="true" />
+                        <MapPin size={18} aria-hidden="true" />
                         <span>{t.hero.location}</span>
                     </div>
 
                     {/* CTA Group */}
                     <div className="cta-group">
-                        <motion.a
-                            href="#contact"
-                            className="btn btn-primary hero-btn"
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                        >
+                        <a href="#contact" className="btn btn-primary hero-btn">
                             <span>{t.hero.cta}</span>
-                            <ArrowRight size={17} aria-hidden="true" />
-                        </motion.a>
+                            <ArrowRight size={18} aria-hidden="true" />
+                        </a>
 
-                        <motion.a
+                        <a
                             href="/assets/documents/CV_Ait-Oujkal_Farouk.pdf"
                             download="CV_Ait-Oujkal_Farouk.pdf"
                             className="btn btn-outline hero-btn"
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
                             aria-label={t.hero.downloadCV}
                         >
-                            <Download size={17} aria-hidden="true" />
+                            <Download size={18} aria-hidden="true" />
                             <span>{t.hero.downloadCV}</span>
-                        </motion.a>
+                        </a>
                     </div>
 
                     {/* Social Quick Links */}
@@ -71,7 +64,7 @@ const Hero = () => {
                             aria-label="Profil LinkedIn d'Ait Oujkal Farouk"
                             title="LinkedIn"
                         >
-                            <Linkedin size={18} aria-hidden="true" />
+                            <Linkedin size={22} aria-hidden="true" />
                         </a>
                         <a
                             href="https://github.com/faroukaitoujkal"
@@ -81,7 +74,7 @@ const Hero = () => {
                             aria-label="Profil GitHub d'Ait Oujkal Farouk"
                             title="GitHub"
                         >
-                            <Github size={18} aria-hidden="true" />
+                            <Github size={22} aria-hidden="true" />
                         </a>
                         <a
                             href="mailto:faroukaitoujkal@gmail.com"
@@ -89,35 +82,31 @@ const Hero = () => {
                             aria-label="Envoyer un email directement à Farouk"
                             title="Email"
                         >
-                            <Mail size={18} aria-hidden="true" />
+                            <Mail size={22} aria-hidden="true" />
                         </a>
                     </div>
                 </motion.div>
 
-                {/* Hero Avatar & Visual Frame */}
+                {/* Hero Avatar Frame */}
                 <motion.div
                     className="hero-visual"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.7, delay: 0.2 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
                 >
                     <div className="avatar-frame">
-                        <div className="avatar-glow-backdrop" aria-hidden="true"></div>
                         <div className="image-wrapper">
                             <img
                                 src="/assets/images/avatar.jpeg"
                                 alt="Ait Oujkal Farouk - Software Developer"
-                                width="300"
-                                height="300"
+                                width="320"
+                                height="320"
                                 loading="eager"
                             />
                         </div>
                     </div>
                 </motion.div>
             </div>
-
-            {/* Background Ambient Grid Overlay */}
-            <div className="hero-bg-grid" aria-hidden="true"></div>
         </SectionContainer>
     );
 };

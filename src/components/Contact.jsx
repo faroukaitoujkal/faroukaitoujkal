@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Mail, Github, Linkedin, Send, Phone, MapPin, Copy, Check, CheckCircle2, Loader2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle, Copy } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import SectionContainer from './SectionContainer';
 import './Contact.css';
@@ -8,32 +9,85 @@ import './Contact.css';
 const Contact = () => {
     const { t } = useLanguage();
     const form = useRef();
-    const [status, setStatus] = useState('');
-    const [copiedItem, setCopiedItem] = useState(null);
 
-    const handleCopy = (text, type) => {
-        navigator.clipboard.writeText(text);
-        setCopiedItem(type);
-        setTimeout(() => setCopiedItem(null), 2500);
+    const [formState, setFormState] = useState({
+        user_name: '',
+        user_email: '',
+        subject: '',
+        message: ''
+    });
+
+    const [status, setStatus] = useState({
+        submitting: false,
+        success: false,
+        error: false,
+        errors: {}
+    });
+
+    const [copied, setCopied] = useState(false);
+
+    const handleCopyEmail = () => {
+        navigator.clipboard.writeText(t.contact.emailValue);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
     };
 
-    const sendEmail = (e) => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormState(prev => ({ ...prev, [name]: value }));
+        // Clear error when typing
+        if (status.errors[name]) {
+            setStatus(prev => ({
+                ...prev,
+                errors: { ...prev.errors, [name]: '' }
+            }));
+        }
+    };
+
+    const validate = () => {
+        const newErrors = {};
+        if (!formState.user_name.trim()) newErrors.user_name = 'Required';
+        if (!formState.user_email.trim()) {
+            newErrors.user_email = 'Required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.user_email)) {
+            newErrors.user_email = 'Invalid email address';
+        }
+        if (!formState.message.trim()) newErrors.message = 'Required';
+
+        return newErrors;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setStatus('sending');
 
-        const SERVICE_ID = 'service_skvpcol';
-        const TEMPLATE_ID = 'template_fcgiooq';
-        const PUBLIC_KEY = 'vpEpCsMKoOP9UMxjo';
+        const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+            setStatus(prev => ({ ...prev, errors: validationErrors }));
+            return;
+        }
 
-        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-            .then(() => {
-                setStatus('success');
-                if (form.current) form.current.reset();
-                setTimeout(() => setStatus(''), 6000);
-            }, () => {
-                setStatus('error');
-                setTimeout(() => setStatus(''), 6000);
+        setStatus({ submitting: true, success: false, error: false, errors: {} });
+
+        try {
+            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_skvpcol';
+            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_fcgiooq';
+            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'vpEpCsMKoOP9UMxjo';
+
+            await emailjs.sendForm(serviceId, templateId, form.current, {
+                publicKey: publicKey,
             });
+
+            setStatus({ submitting: false, success: true, error: false, errors: {} });
+            setFormState({ user_name: '', user_email: '', subject: '', message: '' });
+
+            setTimeout(() => {
+                setStatus(prev => ({ ...prev, success: false }));
+            }, 5000);
+
+        } catch (error) {
+            console.error('Email send error:', error);
+            setStatus({ submitting: false, success: false, error: true, errors: {} });
+        }
     };
 
     return (
@@ -42,205 +96,186 @@ const Contact = () => {
                 <div className="section-header">
                     <h2 className="section-title">{t.contact.title}</h2>
                     <p className="section-subtitle">{t.contact.subtitle}</p>
-                    <div className="section-divider" aria-hidden="true"></div>
                 </div>
 
-                <div className="contact-grid">
-                    {/* Left Column: Direct Info & Social Cards */}
-                    <div className="contact-info-col">
-                        <div className="contact-intro-card glass-card">
-                            <h3>{t.contact.message}</h3>
-                            <p>{t.contact.infoDescription}</p>
+                <div className="contact-wrapper">
+                    {/* Contact Info Column */}
+                    <motion.div
+                        className="contact-info-col"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <h3 className="contact-message-text">{t.contact.message}</h3>
+                        <p className="contact-info-desc">{t.contact.infoDescription}</p>
 
-                            {/* Direct Contact Items with One-Click Copy */}
-                            <div className="direct-contact-items">
-                                {/* Email */}
-                                <div className="direct-contact-card">
-                                    <div className="direct-icon-box" aria-hidden="true">
-                                        <Mail size={19} />
-                                    </div>
-                                    <div className="direct-text">
-                                        <span className="direct-label">{t.contact.emailLabel}</span>
-                                        <a
-                                            href={`mailto:${t.contact.emailValue}`}
-                                            className="direct-val"
-                                            title="Envoyer un email"
-                                        >
-                                            {t.contact.emailValue}
-                                        </a>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        className={`copy-btn ${copiedItem === 'email' ? 'copied' : ''}`}
-                                        onClick={() => handleCopy(t.contact.emailValue, 'email')}
-                                        aria-label={copiedItem === 'email' ? t.contact.copied : "Copier l'adresse email"}
-                                        title={copiedItem === 'email' ? t.contact.copied : "Copier"}
-                                    >
-                                        {copiedItem === 'email' ? (
-                                            <span className="copied-wrapper">
-                                                <Check size={15} className="copied-icon" />
-                                                <span className="copied-text">{t.contact.copied}</span>
-                                            </span>
-                                        ) : (
-                                            <Copy size={15} />
-                                        )}
-                                    </button>
+                        <div className="contact-details-list">
+                            <div className="contact-detail-item">
+                                <div className="contact-detail-icon">
+                                    <MapPin size={22} aria-hidden="true" />
                                 </div>
-
-                                {/* Phone */}
-                                <div className="direct-contact-card">
-                                    <div className="direct-icon-box" aria-hidden="true">
-                                        <Phone size={19} />
-                                    </div>
-                                    <div className="direct-text">
-                                        <span className="direct-label">{t.contact.phoneLabel}</span>
-                                        <a
-                                            href={`tel:${t.contact.phoneValue.replace(/\s+/g, '')}`}
-                                            className="direct-val"
-                                            title="Appeler"
-                                        >
-                                            {t.contact.phoneValue}
-                                        </a>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        className={`copy-btn ${copiedItem === 'phone' ? 'copied' : ''}`}
-                                        onClick={() => handleCopy(t.contact.phoneValue, 'phone')}
-                                        aria-label={copiedItem === 'phone' ? t.contact.copied : "Copier le numéro de téléphone"}
-                                        title={copiedItem === 'phone' ? t.contact.copied : "Copier"}
-                                    >
-                                        {copiedItem === 'phone' ? (
-                                            <span className="copied-wrapper">
-                                                <Check size={15} className="copied-icon" />
-                                                <span className="copied-text">{t.contact.copied}</span>
-                                            </span>
-                                        ) : (
-                                            <Copy size={15} />
-                                        )}
-                                    </button>
-                                </div>
-
-                                {/* Location */}
-                                <div className="direct-contact-card">
-                                    <div className="direct-icon-box" aria-hidden="true">
-                                        <MapPin size={19} />
-                                    </div>
-                                    <div className="direct-text">
-                                        <span className="direct-label">{t.contact.locationLabel}</span>
-                                        <span className="direct-val">{t.contact.locationValue}</span>
-                                    </div>
+                                <div className="contact-detail-content">
+                                    <span className="contact-detail-label">{t.contact.locationLabel}</span>
+                                    <span className="contact-detail-value">{t.contact.locationValue}</span>
                                 </div>
                             </div>
 
-                            {/* Social Buttons */}
-                            <div className="contact-socials-group">
-                                <a
-                                    href="https://www.linkedin.com/in/farouk-aitoujkal/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="contact-social-btn linkedin"
-                                    title="Profil LinkedIn"
-                                    aria-label="Profil LinkedIn d'Ait Oujkal Farouk"
-                                >
-                                    <Linkedin size={18} aria-hidden="true" />
-                                    <span>LinkedIn</span>
-                                </a>
-                                <a
-                                    href="https://github.com/faroukaitoujkal"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="contact-social-btn github"
-                                    title="Profil GitHub"
-                                    aria-label="Profil GitHub d'Ait Oujkal Farouk"
-                                >
-                                    <Github size={18} aria-hidden="true" />
-                                    <span>GitHub</span>
-                                </a>
+                            <div className="contact-detail-item">
+                                <div className="contact-detail-icon">
+                                    <Phone size={22} aria-hidden="true" />
+                                </div>
+                                <div className="contact-detail-content">
+                                    <span className="contact-detail-label">{t.contact.phoneLabel}</span>
+                                    <span className="contact-detail-value">{t.contact.phoneValue}</span>
+                                </div>
+                            </div>
+
+                            <div className="contact-detail-item">
+                                <div className="contact-detail-icon">
+                                    <Mail size={22} aria-hidden="true" />
+                                </div>
+                                <div className="contact-detail-content">
+                                    <span className="contact-detail-label">{t.contact.emailLabel}</span>
+                                    <button
+                                        onClick={handleCopyEmail}
+                                        className="contact-email-btn"
+                                        aria-label="Copier l'adresse email"
+                                    >
+                                        <span>{t.contact.emailValue}</span>
+                                        <Copy size={16} aria-hidden="true" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
-                    {/* Right Column: Contact Form */}
-                    <div className="contact-form-col">
-                        <div className="contact-form-card glass-card">
-                            <form ref={form} onSubmit={sendEmail} className="contact-form">
-                                <div className="form-group">
-                                    <label htmlFor="user_name">{t.contact.form.name}</label>
-                                    <input
-                                        id="user_name"
-                                        type="text"
-                                        name="user_name"
-                                        required
-                                        autoComplete="name"
-                                        className="form-input"
-                                    />
-                                </div>
+                    {/* Contact Form Column */}
+                    <motion.div
+                        className="contact-form-col"
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                        <form ref={form} onSubmit={handleSubmit} className="contact-form" noValidate>
+                            <div className="form-group">
+                                <label htmlFor="user_name" className="form-label">{t.contact.form.name}</label>
+                                <input
+                                    type="text"
+                                    id="user_name"
+                                    name="user_name"
+                                    value={formState.user_name}
+                                    onChange={handleChange}
+                                    className={`form-input ${status.errors.user_name ? 'error' : ''}`}
+                                    placeholder={t.contact.form.placeholders.name}
+                                    aria-invalid={status.errors.user_name ? 'true' : 'false'}
+                                />
+                                {status.errors.user_name && <span className="form-error-msg">{status.errors.user_name}</span>}
+                            </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="user_email">{t.contact.form.email}</label>
-                                    <input
-                                        id="user_email"
-                                        type="email"
-                                        name="user_email"
-                                        required
-                                        autoComplete="email"
-                                        className="form-input"
-                                    />
-                                </div>
+                            <div className="form-group">
+                                <label htmlFor="user_email" className="form-label">{t.contact.form.email}</label>
+                                <input
+                                    type="email"
+                                    id="user_email"
+                                    name="user_email"
+                                    value={formState.user_email}
+                                    onChange={handleChange}
+                                    className={`form-input ${status.errors.user_email ? 'error' : ''}`}
+                                    placeholder={t.contact.form.placeholders.email}
+                                    aria-invalid={status.errors.user_email ? 'true' : 'false'}
+                                />
+                                {status.errors.user_email && <span className="form-error-msg">{status.errors.user_email}</span>}
+                            </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="subject">{t.contact.form.subject}</label>
-                                    <input
-                                        id="subject"
-                                        type="text"
-                                        name="subject"
-                                        required
-                                        className="form-input"
-                                    />
-                                </div>
+                            <div className="form-group">
+                                <label htmlFor="subject" className="form-label">{t.contact.form.subject}</label>
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    name="subject"
+                                    value={formState.subject}
+                                    onChange={handleChange}
+                                    className="form-input"
+                                    placeholder={t.contact.form.placeholders.subject}
+                                />
+                            </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="message">{t.contact.form.message}</label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        rows="5"
-                                        required
-                                        className="form-input"
-                                    ></textarea>
-                                </div>
+                            <div className="form-group">
+                                <label htmlFor="message" className="form-label">{t.contact.form.message}</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={formState.message}
+                                    onChange={handleChange}
+                                    className={`form-input form-textarea ${status.errors.message ? 'error' : ''}`}
+                                    placeholder={t.contact.form.placeholders.message}
+                                    aria-invalid={status.errors.message ? 'true' : 'false'}
+                                />
+                                {status.errors.message && <span className="form-error-msg">{status.errors.message}</span>}
+                            </div>
 
-                                <button
-                                    type="submit"
-                                    className={`btn btn-primary submit-btn ${status}`}
-                                    disabled={status === 'sending'}
-                                >
-                                    {status === 'sending' ? (
-                                        <>
-                                            <Loader2 size={17} className="spinner" aria-hidden="true" />
-                                            <span>{t.contact.form.sending}</span>
-                                        </>
-                                    ) : status === 'success' ? (
-                                        <>
-                                            <CheckCircle2 size={18} aria-hidden="true" />
-                                            <span>{t.contact.form.success}</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span>{t.contact.form.send}</span>
-                                            <Send size={16} aria-hidden="true" />
-                                        </>
-                                    )}
-                                </button>
-
-                                {status === 'error' && (
-                                    <p className="error-msg" role="alert">{t.contact.form.error}</p>
+                            <button
+                                type="submit"
+                                className="btn btn-primary submit-btn"
+                                disabled={status.submitting}
+                            >
+                                {status.submitting ? (
+                                    <span>{t.contact.form.sending}</span>
+                                ) : (
+                                    <>
+                                        <span>{t.contact.form.send}</span>
+                                        <Send size={18} aria-hidden="true" />
+                                    </>
                                 )}
-                            </form>
-                        </div>
-                    </div>
+                            </button>
+
+                            {/* Status Messages */}
+                            <AnimatePresence>
+                                {status.success && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        className="form-status-msg success"
+                                    >
+                                        <CheckCircle2 size={20} aria-hidden="true" />
+                                        <span>{t.contact.form.success}</span>
+                                    </motion.div>
+                                )}
+
+                                {status.error && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        className="form-status-msg error"
+                                    >
+                                        <AlertCircle size={20} aria-hidden="true" />
+                                        <span>{t.contact.form.error}</span>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </form>
+                    </motion.div>
                 </div>
             </div>
+
+            {/* Copy Toast Indicator */}
+            <AnimatePresence>
+                {copied && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        className="copy-toast"
+                        role="alert"
+                    >
+                        {t.contact.copied}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </SectionContainer>
     );
 };

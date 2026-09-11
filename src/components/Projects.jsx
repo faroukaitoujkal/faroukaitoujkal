@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Code2, CheckSquare, Sparkles, Radio, Monitor } from 'lucide-react';
+import { Github, ExternalLink, Code2, CheckSquare, Sparkles, Radio, Monitor, ZoomIn, X } from 'lucide-react';
 import SectionContainer from './SectionContainer';
 import './Projects.css';
 
 const Projects = () => {
     const { t } = useLanguage();
     const [activeFilter, setActiveFilter] = useState('all');
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    React.useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') setSelectedImage(null);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
 
     const filterButtons = [
         { id: 'all', label: t.projects.filterAll, icon: Sparkles },
@@ -63,24 +72,36 @@ const Projects = () => {
                             >
                                 <div className="project-card">
                                     {/* Card Header & Image */}
-                                    <div className="project-image-container">
+                                    <div 
+                                        className="project-image-container"
+                                        onClick={() => project.image && setSelectedImage(project.image)}
+                                        role={project.image ? "button" : "presentation"}
+                                        tabIndex={project.image ? 0 : -1}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' && project.image) setSelectedImage(project.image);
+                                        }}
+                                        aria-label={project.image ? `Agrandir l'image de ${project.title}` : undefined}
+                                    >
                                         {project.image ? (
-                                            <img
-                                                src={project.image}
-                                                alt={`Aperçu du projet ${project.title}`}
-                                                className="project-img"
-                                                loading="lazy"
-                                                width="600"
-                                                height="340"
-                                            />
+                                            <>
+                                                <img
+                                                    src={project.image}
+                                                    alt={`Aperçu du projet ${project.title}`}
+                                                    className="project-img"
+                                                    loading="lazy"
+                                                    width="600"
+                                                    height="340"
+                                                />
+                                                <div className="zoom-indicator">
+                                                    <ZoomIn size={28} />
+                                                </div>
+                                            </>
                                         ) : (
                                             <div className="project-fallback-icon">
                                                 <Code2 size={44} aria-hidden="true" />
                                             </div>
                                         )}
-                                        <div className="project-badge-tag">
-                                            {project.badge}
-                                        </div>
+
                                     </div>
 
                                     {/* Card Content */}
@@ -140,6 +161,42 @@ const Projects = () => {
                         ))}
                     </AnimatePresence>
                 </div>
+
+                {/* Lightbox Modal */}
+                <AnimatePresence>
+                    {selectedImage && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="lightbox-overlay"
+                            onClick={() => setSelectedImage(null)}
+                        >
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="lightbox-content"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                <button
+                                    className="lightbox-close"
+                                    onClick={() => setSelectedImage(null)}
+                                    aria-label="Fermer"
+                                >
+                                    <X size={28} />
+                                </button>
+                                <img
+                                    src={selectedImage}
+                                    alt="Aperçu agrandi"
+                                    className="lightbox-img"
+                                />
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </SectionContainer>
     );

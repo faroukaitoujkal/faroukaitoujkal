@@ -212,7 +212,11 @@ const Contact = () => {
                                     className={`form-input form-textarea ${status.errors.message ? 'error' : ''}`}
                                     placeholder={t.contact.form.placeholders.message}
                                     aria-invalid={status.errors.message ? 'true' : 'false'}
+                                    maxLength={500}
                                 />
+                                <div className="form-char-count">
+                                    {formState.message.length}/500
+                                </div>
                                 {status.errors.message && <span className="form-error-msg">{status.errors.message}</span>}
                             </div>
 

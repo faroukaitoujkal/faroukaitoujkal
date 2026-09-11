@@ -164,6 +164,7 @@
 
 .form-textarea {
   min-height: 150px;
+  max-height: 300px;
   resize: vertical;
 }
 
@@ -173,6 +174,13 @@
   left: 0;
   font-size: 0.75rem;
   color: var(--accent-danger);
+}
+
+.form-char-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 0.25rem;
 }
 
 .submit-btn {

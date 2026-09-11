@@ -171,7 +171,7 @@ export const translations = {
                         "Relational SQL database schema modeling teams, players, fouls, quarters, and statistics."
                     ],
                     tech: ["C#", ".NET", "Angular", "TypeScript", "SignalR", "SQL"],
-                    image: "/assets/images/basketball.png",
+                    image: "/assets/images/basketball.jpg",
                     github: "https://github.com/faroukaitoujkal/BasketBall_LiveScore",
                     demo: null
                 },
@@ -188,7 +188,7 @@ export const translations = {
                         "Optimized search and filtering algorithms for availability."
                     ],
                     tech: ["Java", "JavaFX", "MVC", "SQL"],
-                    image: "/assets/images/helb_hotel.png",
+                    image: "/assets/images/HELBHotel.jpg",
                     github: "https://github.com/faroukaitoujkal/HELBHotel",
                     demo: null
                 },
@@ -205,7 +205,7 @@ export const translations = {
                         "Designed for high frame-rate responsiveness and clean modular code."
                     ],
                     tech: ["Java", "JavaFX", "MVC", "OOP Design"],
-                    image: "/assets/images/helb_tower.png",
+                    image: "/assets/images/HELBTower.jpg",
                     github: "https://github.com/faroukaitoujkal/HELBTower",
                     demo: null
                 }
@@ -458,7 +458,7 @@ export const translations = {
                         "Base de données relationnelle SQL modélisant équipes, joueurs, fautes, chronos et statistiques."
                     ],
                     tech: ["C#", ".NET", "Angular", "TypeScript", "SignalR", "SQL"],
-                    image: "/assets/images/basketball.png",
+                    image: "/assets/images/basketball.jpg",
                     github: "https://github.com/faroukaitoujkal/BasketBall_LiveScore",
                     demo: null
                 },
@@ -475,7 +475,7 @@ export const translations = {
                         "Code clair, maintenable et découplé facilitant les extensions futures."
                     ],
                     tech: ["Java", "JavaFX", "MVC", "SQL"],
-                    image: "/assets/images/helb_hotel.png",
+                    image: "/assets/images/HELBHotel.jpg",
                     github: "https://github.com/faroukaitoujkal/HELBHotel",
                     demo: null
                 },
@@ -492,7 +492,7 @@ export const translations = {
                         "Optimisation des temps de réponse et architecture logicielle propre."
                     ],
                     tech: ["Java", "JavaFX", "MVC", "POO"],
-                    image: "/assets/images/helb_tower.png",
+                    image: "/assets/images/HELBTower.jpg",
                     github: "https://github.com/faroukaitoujkal/HELBTower",
                     demo: null
                 }

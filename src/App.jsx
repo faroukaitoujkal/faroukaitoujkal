@@ -11,6 +11,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import MentionsLegales from './pages/MentionsLegales';
 import PolitiqueConfidentialite from './pages/PolitiqueConfidentialite';
+import { Analytics } from '@vercel/analytics/react';
 
 const MainContent = () => (
     <>
@@ -39,6 +40,7 @@ function App() {
                         </Routes>
                     </Router>
                 </div>
+                <Analytics />
             </ThemeProvider>
         </LanguageProvider>
     );

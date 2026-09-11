@@ -260,7 +260,7 @@ export const translations = {
                 },
                 {
                     title: "2. Hosting",
-                    content: "This website is hosted by GitHub Pages (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA)."
+                    content: "This website is hosted by Vercel Inc. (Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA)."
                 },
                 {
                     title: "3. Intellectual Property",
@@ -547,7 +547,7 @@ export const translations = {
                 },
                 {
                     title: "2. Hébergement",
-                    content: "Ce site est hébergé par GitHub Pages (GitHub Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis)."
+                    content: "Ce site est hébergé par Vercel Inc. (Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis)."
                 },
                 {
                     title: "3. Propriété Intellectuelle",

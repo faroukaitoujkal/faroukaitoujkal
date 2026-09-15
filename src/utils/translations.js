@@ -14,7 +14,7 @@ export const translations = {
             status: "Open to new opportunities",
             greeting: "Hello, I'm",
             role: "Software Developer",
-            description: "Passionate developer crafting modern websites, responsive web apps, and custom software solutions. Combining clean code, intuitive user interfaces, and reliable engineering (React, Node.js, TypeScript, C#, Java) to deliver solid, maintainable digital products.",
+            description: "Passionate developer crafting modern websites, responsive web apps, and custom software solutions. Combining clean code, intuitive user interfaces, and reliable development (React, Node.js, TypeScript, C#, Java) to deliver solid, maintainable digital products.",
             cta: "Get in touch",
             downloadCV: "Download Resume",
             location: "Brussels, Belgium",
@@ -39,7 +39,7 @@ export const translations = {
                     desc: "Advocate for MVC, separation of concerns, strict typing with TypeScript, and maintainable codebase design."
                 },
                 {
-                    title: "Web & Software Engineering",
+                    title: "Web & Software Development",
                     desc: "Building modern websites, robust backend APIs, and desktop or web software systems built for longevity."
                 }
             ],
@@ -56,7 +56,7 @@ export const translations = {
         },
         experience: {
             title: "Experience & Journey",
-            subtitle: "Proven track record in IT training, enterprise consulting, and software engineering.",
+            subtitle: "Proven track record in IT training, enterprise consulting, and software development.",
             tabs: {
                 experience: "Professional Experience",
                 education: "Education & Degree"
@@ -86,7 +86,7 @@ export const translations = {
                     points: [
                         "Designed and developed robust server-side modules in Node.js using TypeScript for strict type safety.",
                         "Architected relational database schemas and optimized data queries with PostgreSQL.",
-                        "Engineered modular REST APIs ensuring high reliability, validation, and data security.",
+                        "Developed modular REST APIs ensuring high reliability, validation, and data security.",
                         "Applied agile principles (Kanban, Jira), participating in code reviews and architecture iterations."
                     ],
                     skills: ["Node.js", "TypeScript", "PostgreSQL", "REST APIs", "Git", "Kanban"],
@@ -103,14 +103,14 @@ export const translations = {
                     degree: "Bachelor in Computer Science: Application Development",
                     institution: "Haute École Libre de Bruxelles - Ilya Prigogine",
                     location: "Brussels, Belgium",
-                    description: "Comprehensive university training focused on software engineering, OOP, systems architecture, and web development.",
+                    description: "Comprehensive university training focused on software development, OOP, systems architecture, and web development.",
                     points: [
                         "Object-Oriented Programming & Patterns: Java, C#, TypeScript, MVC architectures.",
                         "Database Systems: Relational modeling, SQL, PL/SQL, indexing and transactions.",
                         "Web & Distributed Systems: Angular, React, Node.js, WebSockets, real-time communications.",
                         "Project Management: Agile/Scrum methodologies, Git version control, technical specifications."
                     ],
-                    skills: ["Software Engineering", "OOP & MVC", "SQL & Databases", "Full Stack Web", "Agile"]
+                    skills: ["Software Development", "OOP & MVC", "SQL & Databases", "Full Stack Web", "Agile"]
                 },
                 {
                     period: "2016 - 2022",
@@ -133,19 +133,19 @@ export const translations = {
             },
             list: [
                 { name: 'TypeScript', category: 'frontend', level: 'Advanced', description: 'Strict typing, scalable architectures, modern ESNext features' },
-                { name: 'JavaScript', category: 'frontend', level: 'Advanced', description: 'Modern DOM manipulation, async/await, reactive patterns' },
+                { name: 'JavaScript', category: 'frontend', level: 'Proficient', description: 'Modern DOM manipulation, async/await, reactive patterns' },
                 { name: 'React', category: 'frontend', level: 'Advanced', description: 'Hooks, Context API, component design, responsive UI' },
                 { name: 'Angular', category: 'frontend', level: 'Proficient', description: 'Enterprise frontend framework, RxJS, TypeScript services' },
                 { name: 'HTML5 & CSS3', category: 'frontend', level: 'Advanced', description: 'Semantic HTML, responsive layouts, CSS variables, glassmorphism' },
                 { name: 'Node.js', category: 'backend', level: 'Advanced', description: 'Server-side runtimes, asynchronous microservices, REST APIs' },
-                { name: 'C# / .NET', category: 'backend', level: 'Proficient', description: 'Robust backend development, object-oriented design, APIs' },
-                { name: 'Java', category: 'backend', level: 'Proficient', description: 'Core OOP, multi-threading, software engineering principles' },
-                { name: 'PostgreSQL', category: 'database', level: 'Advanced', description: 'Relational modeling, indexing, ACID transactions, complex joins' },
-                { name: 'SQL & PL/SQL', category: 'database', level: 'Advanced', description: 'Advanced querying, stored procedures, database normalization' },
+                { name: 'C# / .NET', category: 'backend', level: 'Advanced', description: 'Robust backend development, object-oriented design, APIs' },
+                { name: 'Java', category: 'backend', level: 'Advanced', description: 'Core OOP, multi-threading, software development principles' },
+                { name: 'PostgreSQL', category: 'database', level: 'Proficient', description: 'Relational modeling, indexing, ACID transactions, complex joins' },
+                { name: 'SQL & PL/SQL', category: 'database', level: 'Proficient', description: 'Advanced querying, stored procedures, database normalization' },
                 { name: 'SignalR', category: 'database', level: 'Proficient', description: 'Bi-directional real-time communication & WebSockets' },
                 { name: 'JavaFX', category: 'tools', level: 'Proficient', description: 'Desktop GUI development, MVC architecture, event handling' },
                 { name: 'Git & GitHub', category: 'tools', level: 'Advanced', description: 'Version control, branch workflows, collaborative PRs' },
-                { name: 'Jira & Kanban', category: 'tools', level: 'Proficient', description: 'Agile sprint planning, backlog management, CI/CD mindset' }
+                { name: 'Jira & Kanban', category: 'tools', level: 'Advanced', description: 'Agile sprint planning, backlog management, CI/CD mindset' }
             ]
         },
         projects: {
@@ -171,7 +171,7 @@ export const translations = {
                         "Relational SQL database schema modeling teams, players, fouls, quarters, and statistics."
                     ],
                     tech: ["C#", ".NET", "Angular", "TypeScript", "SignalR", "SQL"],
-                    image: "/assets/images/basketball.jpg",
+                    image: "/assets/images/basketball_preview.jpg",
                     github: "https://github.com/faroukaitoujkal/BasketBall_LiveScore",
                     demo: null
                 },
@@ -188,7 +188,7 @@ export const translations = {
                         "Optimized search and filtering algorithms for availability."
                     ],
                     tech: ["Java", "JavaFX", "MVC", "SQL"],
-                    image: "/assets/images/HELBHotel.jpg",
+                    image: "/assets/images/helbhotel-preview.jpg",
                     github: "https://github.com/faroukaitoujkal/HELBHotel",
                     demo: null
                 },
@@ -205,7 +205,7 @@ export const translations = {
                         "Designed for high frame-rate responsiveness and clean modular code."
                     ],
                     tech: ["Java", "JavaFX", "MVC", "OOP Design"],
-                    image: "/assets/images/HELBTower.jpg",
+                    image: "/assets/images/helbtower_preview.jpg",
                     github: "https://github.com/faroukaitoujkal/HELBTower",
                     demo: null
                 }
@@ -245,7 +245,7 @@ export const translations = {
         },
         footer: {
             copyright: "Ait Oujkal Farouk — Software Developer",
-            tagline: "Engineering resilient, high-performance software and web systems.",
+            tagline: "Developing resilient, high-performance software and web systems.",
             rights: "All rights reserved.",
             legal: "Legal Notice",
             privacy: "Privacy Policy",
@@ -315,7 +315,7 @@ export const translations = {
         about: {
             title: "À Propos de Moi",
             subtitle: "Passionné par la conception de logiciels fiables, de sites web ergonomiques et la résolution de défis techniques.",
-            description: "Développeur passionné par le développement web et logiciel, j'interviens de la modélisation de bases de données jusqu'au développement d'applications complètes et réactives. J'aime concevoir des architectures modulaires, fiables et propres en appliquant les meilleures pratiques du génie logiciel. Rigoureux, curieux et polyvalent, je transforme des besoins concrets en solutions digitales intuitives et robustes.",
+            description: "Développeur passionné par le développement web et logiciel, j'interviens de la modélisation de bases de données jusqu'au développement d'applications complètes et réactives. J'aime concevoir des architectures modulaires, fiables et propres en appliquant les meilleures pratiques du développement logiciel. Rigoureux, curieux et polyvalent, je transforme des besoins concrets en solutions digitales intuitives et robustes.",
             highlights: [
                 {
                     title: "Vision End-to-End",
@@ -369,7 +369,7 @@ export const translations = {
                     role: "Développeur Consultant (Stage)",
                     company: "AMA European Consulting",
                     location: "Bruxelles, Belgique",
-                    description: "Développement et renforcement d'une application d'entreprise selon les standards modernes du génie logiciel.",
+                    description: "Développement et renforcement d'une application d'entreprise selon les standards modernes du développement logiciel.",
                     points: [
                         "Conception et implémentation de fonctionnalités backend en Node.js avec TypeScript pour un typage strict et une scalabilité accrue.",
                         "Modélisation du schéma relationnel et optimisation des opérations de données sous PostgreSQL.",
@@ -390,14 +390,14 @@ export const translations = {
                     degree: "Bachelier en Informatique : Développement d'applications",
                     institution: "Haute École Libre de Bruxelles - Ilya Prigogine",
                     location: "Bruxelles, Belgique",
-                    description: "Cursus intensif en génie logiciel, programmation orientée objet, conception de bases de données et technologies web.",
+                    description: "Cursus intensif en développement logiciel, programmation orientée objet, conception de bases de données et technologies web.",
                     points: [
                         "POO & Design Patterns : Maîtrise approfondie de Java, C#, TypeScript et de l'architecture MVC.",
                         "Bases de Données Relationnelles : Modélisation avancée, requêtage SQL, PL/SQL, transactions et indexation.",
                         "Écosystème Web & Distribué : Angular, React, Node.js, WebSockets et protocoles de communication temps réel.",
                         "Méthodes de travail : Gestion de versions avec Git/GitHub, démarches agiles, rédaction de spécifications techniques."
                     ],
-                    skills: ["Génie Logiciel", "POO & MVC", "SQL & Modélisation", "Web Full Stack", "Méthodes Agiles"]
+                    skills: ["Développement Logiciel", "POO & MVC", "SQL & Modélisation", "Web Full Stack", "Méthodes Agiles"]
                 },
                 {
                     period: "2016 - 2022",
@@ -420,19 +420,19 @@ export const translations = {
             },
             list: [
                 { name: 'TypeScript', category: 'frontend', level: 'Avancé', description: 'Typage statique strict, architectures évolutives, fonctionnalités modernes' },
-                { name: 'JavaScript', category: 'frontend', level: 'Avancé', description: 'Manipulation DOM avancée, asynchronisme async/await, logique réactive' },
+                { name: 'JavaScript', category: 'frontend', level: 'Intermédiaire', description: 'Manipulation DOM avancée, asynchronisme async/await, logique réactive' },
                 { name: 'React', category: 'frontend', level: 'Avancé', description: 'Hooks, Context API, composants modulaires, intégration d\'interfaces dynamiques' },
                 { name: 'Angular', category: 'frontend', level: 'Intermédiaire', description: 'Framework d\'entreprise, injection de dépendances, services et RxJS' },
                 { name: 'HTML5 & CSS3', category: 'frontend', level: 'Avancé', description: 'Structure sémantique, flexbox/grid, animations et glassmorphism' },
                 { name: 'Node.js', category: 'backend', level: 'Avancé', description: 'Serveurs asynchrones, développement d\'APIs REST modulaires et rapides' },
-                { name: 'C# / .NET', category: 'backend', level: 'Intermédiaire', description: 'Développement backend orienté objet, architectures robustes, Web APIs' },
-                { name: 'Java', category: 'backend', level: 'Intermédiaire', description: 'Fondamentaux POO rigoureux, multithreading, structures de données' },
-                { name: 'PostgreSQL', category: 'database', level: 'Avancé', description: 'Conception relationnelle, clés étrangères, indexation et requêtes complexes' },
-                { name: 'SQL & PL/SQL', category: 'database', level: 'Avancé', description: 'Procédures stockées, requêtage performant, normalisation de données' },
+                { name: 'C# / .NET', category: 'backend', level: 'Avancé', description: 'Développement backend orienté objet, architectures robustes, Web APIs' },
+                { name: 'Java', category: 'backend', level: 'Avancé', description: 'Fondamentaux POO rigoureux, multithreading, structures de données' },
+                { name: 'PostgreSQL', category: 'database', level: 'Intermédiaire', description: 'Conception relationnelle, clés étrangères, indexation et requêtes complexes' },
+                { name: 'SQL & PL/SQL', category: 'database', level: 'Intermédiaire', description: 'Procédures stockées, requêtage performant, normalisation de données' },
                 { name: 'SignalR', category: 'database', level: 'Intermédiaire', description: 'Communication bidirectionnelle temps réel via WebSockets' },
                 { name: 'JavaFX', category: 'tools', level: 'Intermédiaire', description: 'Interfaces graphiques desktop riches avec architecture MVC' },
                 { name: 'Git & GitHub', category: 'tools', level: 'Avancé', description: 'Gestion de branches, workflow collaboratif, pull requests et versioning' },
-                { name: 'Jira & Kanban', category: 'tools', level: 'Intermédiaire', description: 'Suivi de tickets, sprints agiles et organisation de livrables' }
+                { name: 'Jira & Kanban', category: 'tools', level: 'Avancé', description: 'Suivi de tickets, sprints agiles et organisation de livrables' }
             ]
         },
         projects: {
@@ -458,7 +458,7 @@ export const translations = {
                         "Base de données relationnelle SQL modélisant équipes, joueurs, fautes, chronos et statistiques."
                     ],
                     tech: ["C#", ".NET", "Angular", "TypeScript", "SignalR", "SQL"],
-                    image: "/assets/images/basketball.jpg",
+                    image: "/assets/images/basketball_preview.jpg",
                     github: "https://github.com/faroukaitoujkal/BasketBall_LiveScore",
                     demo: null
                 },
@@ -475,7 +475,7 @@ export const translations = {
                         "Code clair, maintenable et découplé facilitant les extensions futures."
                     ],
                     tech: ["Java", "JavaFX", "MVC", "SQL"],
-                    image: "/assets/images/HELBHotel.jpg",
+                    image: "/assets/images/helbhotel-preview.jpg",
                     github: "https://github.com/faroukaitoujkal/HELBHotel",
                     demo: null
                 },
@@ -492,7 +492,7 @@ export const translations = {
                         "Optimisation des temps de réponse et architecture logicielle propre."
                     ],
                     tech: ["Java", "JavaFX", "MVC", "POO"],
-                    image: "/assets/images/HELBTower.jpg",
+                    image: "/assets/images/helbtower_preview.jpg",
                     github: "https://github.com/faroukaitoujkal/HELBTower",
                     demo: null
                 }

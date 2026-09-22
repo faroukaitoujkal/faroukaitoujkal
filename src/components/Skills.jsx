@@ -21,12 +21,6 @@ const Skills = () => {
         ? t.skills.list
         : t.skills.list.filter(skill => skill.category === activeFilter);
 
-    const getLevelClass = (level) => {
-        const lvl = (level || '').toLowerCase();
-        if (lvl.includes('avancé') || lvl.includes('advanced')) return 'level-advanced';
-        return 'level-proficient';
-    };
-
     return (
         <SectionContainer id="skills" className="skills-section">
             <div className="container">
@@ -79,9 +73,6 @@ const Skills = () => {
                                 <div className="skill-accent-line" aria-hidden="true"></div>
                                 <div className="skill-top-row">
                                     <h3 className="skill-name">{skill.name}</h3>
-                                    <span className={`skill-level-badge ${getLevelClass(skill.level)}`}>
-                                        {skill.level}
-                                    </span>
                                 </div>
                                 <p className="skill-description">{skill.description}</p>
                             </motion.div>

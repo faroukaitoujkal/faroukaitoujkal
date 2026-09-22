@@ -1,68 +1,100 @@
-<h1 align="center">Hi 👋, I'm Farouk Ait Oujkal</h1>
-<h3 align="center">Software Developer | IT Trainer based in Brussels, Belgium</h3>
+# Ait Oujkal Farouk - Portfolio
 
-<p align="center">
-  <a href="https://farouk-aitoujkal.vercel.app/" target="_blank">
-    <img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" />
-  </a>
-  <a href="https://www.linkedin.com/in/farouk-aitoujkal/" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
-  </a>
-  <a href="mailto:faroukaitoujkal@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
-  </a>
-</p>
+Welcome to my professional developer portfolio repository. This project is a complete, modern web application built to showcase my skills, projects, and professional background as a Software Developer.
 
----
+## 🌟 Overview
 
-### 🚀 About Me
+This portfolio is designed with a focus on clean code architecture, smooth user experience, and modern web standards. It features full internationalization (English & French), dynamic theming (Dark & Light modes), and a fully responsive layout.
 
-Software Developer with a Bachelor's degree in Application Development from HELB (Brussels), and hands-on full-stack experience through an internship at AMA European Consulting.
-Currently working as an **IT Trainer** at Espace Forma, delivering hands-on IT training to a wide range of audiences.
-Curious, analytical, and always looking to take on new technical challenges.
+### 🔗 Live Demo
+[farouk-aitoujkal.vercel.app](https://farouk-aitoujkal.vercel.app/)
 
-- 🎓 Bachelor of Technology – IT Application Development, HELB Ilya Prigogine
-- 💻 Background in full-stack development (.NET / C#, TypeScript, Angular)
-- 🎯 Currently looking to grow into a software development role
+## 🛠️ Built With
 
----
+- **Framework:** React 18
+- **Build Tool:** Vite
+- **Routing:** React Router v7
+- **Animations:** Framer Motion
+- **Styling:** Vanilla CSS (CSS Variables, Flexbox/Grid)
+- **Icons:** Lucide React
+- **Form Handling:** EmailJS
+- **Analytics:** Vercel Analytics
 
-### 🛠️ Tech Stack
+## ✨ Key Features
 
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+- **Component-Driven Architecture:** Clean, reusable React components following modular design patterns.
+- **Custom Context Providers:** Lightweight state management for Theme and Language preferences without heavy dependencies.
+- **Internationalization (i18n):** Complete translation support seamlessly integrated across all components.
+- **Dynamic Theming:** Built-in Light and Dark modes using CSS variables and Context API.
+- **Smooth Animations:** Integrated with Framer Motion for elegant scroll effects, page transitions, and interactive elements.
+- **Fully Responsive:** Mobile-first approach ensuring a flawless experience on smartphones, tablets, and desktops.
+- **Contact Integration:** Functional contact form powered by EmailJS.
 
----
+## 🚀 Getting Started
 
-### 📌 Featured Projects
+To get a local copy up and running, follow these simple steps.
 
-**🏨 HelbHotel** — *Jan 2026 – Jun 2026*
-Hotel room reservation management application built with JavaFX, featuring an intuitive UI for efficient booking and room management.
-🔗 [View Repo](https://github.com/faroukaitoujkal/HELBHotel)
+### Prerequisites
 
-**🏀 BasketBall_LiveScore** — *Sep 2025 – Jan 2026*
-Web app for live basketball match simulation, with a C# back-end and Angular/TypeScript front-end. Integrated SignalR for real-time score updates.
-🔗 [View Repo](https://github.com/faroukaitoujkal/BasketBall_LiveScore)
+- [Node.js](https://nodejs.org/) (v16.x or higher)
+- npm (comes with Node.js)
 
-**🌐 Personal Portfolio** — [farouk-aitoujkal.vercel.app](https://farouk-aitoujkal.vercel.app/)
-My personal website showcasing my projects, skills, and experience.
+### Installation
 
----
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/faroukaitoujkal/my-portfolio.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd my-portfolio
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Set up environment variables:
+   - Copy the `.env.example` file and rename it to `.env`.
+   - Fill in your EmailJS credentials:
+     ```env
+     VITE_EMAILJS_SERVICE_ID=your_emailjs_service_id_here
+     VITE_EMAILJS_TEMPLATE_ID=your_emailjs_template_id_here
+     VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key_here
+     ```
 
-### 🎓 IT Training
+### Running Locally
 
-Alongside development, I train diverse audiences (children, seniors, titres-services beneficiaries) in general IT skills, software use, and digital literacy at Espace Forma — a role that's sharpened how I explain technical concepts clearly.
+Start the Vite development server:
+```bash
+npm run dev
+```
+The application will be available at `http://localhost:5173`.
 
----
+### Building for Production
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=faroukaitoujkal&style=flat-square&color=blue" alt="profile views" />
-</p>
+Create an optimized production build:
+```bash
+npm run build
+```
+The compiled assets will be output to the `dist` folder, ready for deployment.
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/     # Reusable UI components (Hero, Projects, Navbar, etc.)
+├── context/        # React Context providers (Language, Theme)
+├── pages/          # Full page views (Legal, Privacy)
+├── utils/          # Helper functions and static data (Translations, Animations)
+├── App.jsx         # Main application routing and layout
+└── index.css       # Global styles and CSS variables
+public/
+└── assets/         # Static files (images, documents)
+```
+
+## 📬 Contact
+
+**Ait Oujkal Farouk** - Software Developer  
+Email: [faroukaitoujkal@gmail.com](mailto:faroukaitoujkal@gmail.com)  
+LinkedIn: [linkedin.com/in/farouk-aitoujkal](https://www.linkedin.com/in/farouk-aitoujkal/)  
+GitHub: [github.com/faroukaitoujkal](https://github.com/faroukaitoujkal)

@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* Sleek & Professional Software Developer Palette */
-  --bg-main: #0a0a0a;
-  --bg-secondary: #121212;
-  --bg-tertiary: #1a1a1a;
+  /* Sleek & Professional Software Developer Palette (Zinc based) */
+  --bg-main: #09090b;
+  --bg-secondary: #141416;
+  --bg-tertiary: #1f1f22;
   
-  --text-main: #f3f4f6;
+  --text-main: #fafafa;
   --text-secondary: #a1a1aa;
-  --text-muted: #52525b;
+  --text-muted: #71717a;
 
   --accent-primary: #3b82f6;
   --accent-primary-hover: #2563eb;
   --accent-primary-rgb: 59, 130, 246;
 
-  --accent-secondary: #8b5cf6;
+  --accent-secondary: #6366f1;
   --accent-success: #10b981;
   --accent-warning: #f59e0b;
   --accent-danger: #ef4444;

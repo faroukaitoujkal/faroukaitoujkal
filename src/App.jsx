@@ -28,6 +28,13 @@ const MainContent = () => (
 );
 
 function App() {
+    React.useEffect(() => {
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <LanguageProvider>
             <ThemeProvider>

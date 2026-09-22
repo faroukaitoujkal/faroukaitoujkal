@@ -117,7 +117,13 @@ export const translations = {
                     degree: "Secondary Education - Scientific Studies",
                     institution: "Campus Saint Jean",
                     location: "Brussels, Belgium",
-                    description: "Strong scientific foundation in mathematics, logic, and analytical problem solving."
+                    description: "Strong scientific foundation in mathematics, logic, and analytical problem solving.",
+                    points: [
+                        "Development of advanced analytical and mathematical problem-solving skills.",
+                        "Rigorous application of the scientific method and logical reasoning.",
+                        "Solid preparation for higher education in STEM (Science, Technology, Engineering, Mathematics)."
+                    ],
+                    skills: ["Mathematics", "Logic", "Analytical Thinking", "Sciences"]
                 }
             ]
         },
@@ -160,24 +166,24 @@ export const translations = {
             items: [
                 {
                     id: 'basketBall',
-                    title: "BasketBall_LiveScore",
+                    title: "NBA LiveScore - Update & Simulation",
                     category: "realtime",
                     badge: "Real-Time & Full Stack",
-                    desc: "Comprehensive basketball match simulation platform with real-time websocket broadcasting and relational database management.",
+                    desc: "Web platform for tracking and simulating NBA games, using an API to retrieve real-time league data.",
                     features: [
-                        "Real-time live score updates powered by SignalR WebSockets.",
-                        "Rich Angular & TypeScript client with dynamic dashboards.",
-                        "Robust C# backend architecture managing complex match events.",
-                        "Relational SQL database schema modeling teams, players, fouls, quarters, and statistics."
+                        "Integrated an NBA API to retrieve games, results, standings, and statistics.",
+                        "Developed an interactive interface with Angular & TypeScript to browse games and league information.",
+                        "Implemented a game simulation feature to simulate and follow the progress of a match.",
+                        "Designed a responsive interface for smooth navigation between games, teams, and standings."
                     ],
                     tech: ["C#", ".NET", "Angular", "TypeScript", "SignalR", "SQL"],
                     image: "/assets/images/basketball_preview.jpg",
-                    github: "https://github.com/faroukaitoujkal/BasketBall_LiveScore",
+                    github: "https://github.com/faroukaitoujkal/NBA-LiveScore",
                     demo: null
                 },
                 {
                     id: 'helbHotel',
-                    title: "HelbHotel Management System",
+                    title: "HelbHotel - Management System",
                     category: "desktop",
                     badge: "Software Architecture",
                     desc: "Desktop hotel management system automating room reservations, guest lifecycle, and availability tracking.",
@@ -404,7 +410,13 @@ export const translations = {
                     degree: "Enseignement Secondaire - Études Scientifiques",
                     institution: "Campus Saint Jean",
                     location: "Bruxelles, Belgique",
-                    description: "Formation scientifique approfondie axée sur les mathématiques, la rigueur analytique et la logique."
+                    description: "Formation scientifique approfondie axée sur les mathématiques, la rigueur analytique et la logique.",
+                    points: [
+                        "Développement de fortes capacités d'analyse et de résolution de problèmes mathématiques.",
+                        "Application de la méthode scientifique et renforcement de la pensée logique.",
+                        "Acquisition d'un socle de compétences fondamental pour des études supérieures en informatique et technologies."
+                    ],
+                    skills: ["Mathématiques", "Logique", "Rigueur Analytique", "Sciences"]
                 }
             ]
         },
@@ -447,24 +459,24 @@ export const translations = {
             items: [
                 {
                     id: 'basketBall',
-                    title: "BasketBall_LiveScore",
+                    title: "NBA LiveScore - Suivi & Simulation",
                     category: "realtime",
                     badge: "Temps Réel & Full Stack",
-                    desc: "Plateforme web de simulation et de suivi de matchs de basket avec diffusion des scores en temps réel via WebSockets.",
+                    desc: "Plateforme web de suivi et de simulation de matchs NBA utilisant une API pour récupérer les données de la ligue en temps réel.",
                     features: [
-                        "Diffusion temps réel des scores et événements de match grâce à SignalR.",
-                        "Interface interactive développée en Angular & TypeScript.",
-                        "Architecture backend en C# assurant la cohérence des règles de jeu.",
-                        "Base de données relationnelle SQL modélisant équipes, joueurs, fautes, chronos et statistiques."
+                        "Intégration d’une API NBA pour récupérer les matchs, résultats, classements et statistiques.",
+                        "Interface interactive développée avec Angular & TypeScript pour consulter les matchs et les informations de la ligue.",
+                        "Fonctionnalité de simulation de matchs permettant de générer et suivre le déroulement d’une rencontre.",
+                        "Conception d’une interface responsive offrant une navigation fluide entre les matchs, équipes et classements."
                     ],
                     tech: ["C#", ".NET", "Angular", "TypeScript", "SignalR", "SQL"],
                     image: "/assets/images/basketball_preview.jpg",
-                    github: "https://github.com/faroukaitoujkal/BasketBall_LiveScore",
+                    github: "https://github.com/faroukaitoujkal/NBA-LiveScore",
                     demo: null
                 },
                 {
                     id: 'helbHotel',
-                    title: "Système de Gestion HelbHotel",
+                    title: "HelbHotel - Système de Gestion",
                     category: "desktop",
                     badge: "Architecture Logicielle",
                     desc: "Application desktop de gestion hôtelière automatisant la réservation de chambres, la gestion des clients et la facturation.",

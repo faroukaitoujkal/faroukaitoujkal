@@ -65,8 +65,10 @@
 
 .role-gradient {
   font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--text-main), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
 }
 
